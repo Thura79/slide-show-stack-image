@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css </title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./node_modules/imagehover.css/css/imagehover.min.css">
+
+    <style>
+        
+        .side-img {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            z-index: 500;
+            transform: translateX(250px) rotate(-10deg);
+            transition: 1s;
+        }
+
+
+        .show {
+            transform: translate(0);
+            z-index: 500;
+        }
+
+
+        body {
+            height: 3000px;
+            margin: 30px;
+        }
+
+
+        .stack-image {
+            height: 300px;
+            width: 200px;
+            object-fit: cover;
+            object-position: top;
+            margin-left: -160px;
+            border: 5px solid white;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            transform: rotate(10deg);
+            transition: 1s;
+        }
+
+        .stack-image:nth-child(1){
+             margin-left: 0;
+        }
+
+
+        .active {
+            transform: rotate(-10deg) translateX(-100px) translateY(-80px) scale(1.2); 
+        }
+    </style>
+</head>
+<body>
+    
+    <img src="./images/272161884_1145616139312822_5546303797531573468_n.jpg" class="side-img" width="300" height="400" alt="">
+
+    <div class=" col-12 m-5">
+        <button class="show btn btn-primary mt-2">
+            show
+        </button>
+
+        <button class="hide btn btn-primary mt-2">
+            hide
+        </button>
+
+
+        <button class="toggle btn btn-primary mt-2">
+            toggle
+        </button>
+    </div>
+
+
+
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div class="ms-5 mt-5">
+    
+                <img class="stack-image" src="./images/306156965_8183815318327695_1231377417728482885_n.jpg" alt="">
+                <img class="stack-image" src="./images/271159478_1136205666920536_6867860813227404211_n.jpg" alt="">
+                <img class="stack-image" src="./images/272161884_1145616139312822_5546303797531573468_n.jpg" alt="">
+                <img class="stack-image" src="./images/305032426_8183894801653080_2351026075099689291_n.jpg" alt="">
+                <img class="stack-image" src="./images/305200602_8183817894994104_5259245784815379182_n.jpg" alt="">
+                <img class="stack-image" src="./images/306135207_8183894848319742_9087769390917384933_n.jpg" alt="">
+                <img class="stack-image" src="./images/306999066_1297744564099978_3865754399617999963_n.jpg" alt="">
+                <img class="stack-image" src="./images/307278192_1297744387433329_2585454621538414871_n.jpg" alt="">
+            </div>
+        </div>
+
+        <div class=" col-12 m-5">
+            <button class="show btn btn-primary mt-2" id="start">
+                start
+            </button>
+    
+            <button class="hide btn btn-primary mt-2" id="stop">
+                stop
+            </button>
+    
+    
+            <button class="toggle btn btn-primary mt-2" id="auto">
+                auto
+            </button>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <script>
+        let allStackImage = document.querySelectorAll('.stack-image');
+        let start = document.querySelector('#start');
+        let stop = document.querySelector('#stop');
+        let auto = document.querySelector('#auto');
+        
+
+        let currentStack = 0;
+
+
+        function run(){
+            allStackImage[currentStack].classList.add('active');
+            if(currentStack > 0){
+                allStackImage[currentStack - 1].classList.remove('active');
+            }else{
+                allStackImage[allStackImage.length - 1].classList.remove('active');
+            }
+            if(currentStack === allStackImage.length - 1) {
+                currentStack = 0
+            }else{
+                currentStack++;
+            }
+        }
+
+
+        let runner;
+
+        start.addEventListener('click', function(){
+            runner = setInterval(run,1000);
+        })
+
+       stop.addEventListener('click', function(){
+        clearInterval(runner);
+       })
+
+
+
+
+
+
+
+
+
+
+
+        let sideimg = document.querySelector('.side-img');
+        let showBtn = document.querySelector('.show');
+        let hideBtn = document.querySelector('.hide');
+        let toggle = document.querySelector('.toggle');
+
+
+
+        showBtn.addEventListener('click', function(){
+            sideimg.classList.add('show');
+        })
+
+
+        hideBtn.addEventListener('click', function(){
+            sideimg.classList.remove('show');
+        })
+
+
+        toggle.addEventListener('click', function(){
+            sideimg.classList.toggle('show');
+        })
+
+
+
+
+    </script>
+</body>
+</html>
